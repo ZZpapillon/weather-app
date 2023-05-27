@@ -142,7 +142,11 @@ input:focus {
     grid-template-rows: 3fr 1.1fr;
     background-image: url(Icons/bg.jpg);
     background-size: cover;
+    
 }
+
+
+
 .currentDiv {
     grid-row: 1/2;
     grid-column: 1 / 7;
