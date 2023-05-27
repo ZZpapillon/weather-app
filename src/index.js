@@ -2,6 +2,9 @@ import "./style.css";
 import { format } from "date-fns";
 
 const content = document.querySelector('.content')
+const loadingSpinner = document.querySelector('.loading-spinner');
+
+
 let temperatureC, temperatureF,  feelsLike, feelsLikeF;
 let avgTemperatureC = [];
 let avgTemperatureF = [];
@@ -9,10 +12,22 @@ const button = document.createElement('div');
 
 const submitButton = document.querySelector('.form-submit')
 const location = document.getElementById('location-input')
+
+
+
+
+
+
+
+
+
 submitButton.addEventListener('click', async () => {
   try {
     event.preventDefault();
+    loadingSpinner.classList.add('show'); 
     const city = location.value;
+    
+     await new Promise(resolve => setTimeout(resolve, 1500));
     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=7f43201f0f354b8e8ae152120232605&q=${city}&days=7&aqi=no&alerts=no`, { mode: 'cors' });
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -25,8 +40,20 @@ submitButton.addEventListener('click', async () => {
   } catch (error) {
     alert('Error: We dont have this city!', error.message);
     // Handle the error here (e.g., display an error message to the user)
+  }finally {
+    loadingSpinner.classList.remove('show');
   }
 });
+
+
+
+
+
+
+
+
+
+
 
 function removeExistingContent() {
   while (content.firstChild) {
@@ -40,16 +67,25 @@ function removeExistingContent() {
       
    
      async function getWeather() {
+    
+    try {
+      loadingSpinner.classList.add('show'); 
     const response = await fetch('http://api.weatherapi.com/v1/forecast.json?key=7f43201f0f354b8e8ae152120232605&q=Zagreb&days=7&aqi=no&alerts=no', {mode: 'cors'})
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
     const weatherData = await response.json();
-    // content.style.backgroundImage = `url(${weatherData.current.condition.icon})`;
-    //   content.style.backgroundSize = 'cover'
-      console.log(weatherData);
-  console.log(weatherData.forecast);
-  console.log(weatherData.forecast.forecastday);
+    
 
       getWeatherData(weatherData)
+  }catch (error) {
+    alert('Error: We dont have this city!', error.message);
+    // Handle the error here (e.g., display an error message to the user)
+  } finally {
+    loadingSpinner.classList.remove('show');
   }
+}
   getWeather();
 
   function getWeatherData(weatherData)  {
