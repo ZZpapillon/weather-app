@@ -28,7 +28,7 @@ submitButton.addEventListener('click', async () => {
     const city = location.value;
     
      await new Promise(resolve => setTimeout(resolve, 1500));
-    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=7f43201f0f354b8e8ae152120232605&q=${city}&days=7&aqi=no&alerts=no`, { mode: 'cors' });
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=2a3a7190eb4a40948cc123416230708&q=${city}&days=7&aqi=no&alerts=no`, { mode: 'cors' });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -70,7 +70,7 @@ function removeExistingContent() {
     
     try {
       loadingSpinner.classList.add('show'); 
-    const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=7f43201f0f354b8e8ae152120232605&q=Zagreb&days=7&aqi=no&alerts=no', {mode: 'cors'})
+    const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=2a3a7190eb4a40948cc123416230708&q=Zagreb&days=7&aqi=no&alerts=no', {mode: 'cors'})
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
